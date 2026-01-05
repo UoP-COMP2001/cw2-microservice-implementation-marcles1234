@@ -1,2 +1,18 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/aomfCV89)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=22132340&assignment_repo_type=AssignmentRepo)
+CODE IMPLEMENTATION AND FILE EXPLAINATIONS:
+
+---RUN FROM CONSOLE---
+1. app.py - used command python app.py to launch the server on port 8000.
+2. build_database.py - use command python build_database.py to remove all current data held within the tables and insert test data
+
+---TABLE MANAGEMENT---
+1. activity.py - holds CRUD operations for the activities table
+2. preference.py - holds CRUD operations for the preference table
+3. users.py - holds CRUD operations for the users table
+
+---UTILITIES---
+1. templates/home.html - default home page on launch
+2. config.py - connects to database
+3. Dockerfile - needed for docker image
+4. models.py - holds table structure and relationships
+5. requirements.txt - download list for background proccesses
+6. swagger.yml - structure for link directories
