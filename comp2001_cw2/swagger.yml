@@ -1,0 +1,275 @@
+openapi: 3.0.0
+info:
+  title: "RP Flask REST API"
+  description: "An API about users and notes"
+  version: "1.0.0"
+
+servers:
+  - url: "/api"
+
+components:
+  schemas:
+    User:
+      type: "object"
+      required:
+        - Name
+        - Language
+      properties:
+        User_ID:
+          type: "integer"
+          format: int32
+          readOnly: true
+        Name:
+          type: "string"
+        Phone_Number:
+          type: "string"
+        Language:
+          type: "integer"
+          format: int32
+    Activity:
+      type: "object"
+      required:
+        - Favourite_activity
+      properties:
+        Activity_ID:
+          type: "integer"
+          format: int32
+          readOnly: true
+        Favourite_activity:
+          type: "string"
+    Preference:
+      type: "object"
+      required:
+        - Preference
+      properties:
+        Preference_ID:
+          type: "integer"
+          format: int32
+          readOnly: true
+        Preference:
+          type: "string"
+  parameters:
+    User_ID:
+      name: "User_ID"
+      in: path
+      required: true
+      description: "ID of the user"
+      schema:
+        type: integer
+        format: int32
+    Activity_ID:
+      name: "Activity_ID"
+      description: "ID of the activity"
+      in: path
+      required: true
+      schema:
+        type: "integer"
+    Preference_ID:
+      name: "Preference_ID"
+      description: "ID of the preference"
+      in: path
+      required: true
+      schema:
+        type: "integer"
+
+
+paths:
+#----------USERS----------
+  /users:
+    get:
+      operationId: "users.read_all"
+      tags:
+        - "Users"
+      summary: "Read the list of users"
+      responses:
+        "200":
+          description: "Successfully read users list"
+    post:
+      operationId: "users.create"
+      tags:
+        - Users
+      summary: "Create a user"
+      requestBody:
+        description: "User to create"
+        required: true
+        content:
+          application/json:
+            schema:
+              x-body-name: "user"
+              $ref: "#/components/schemas/User"
+      responses:
+        "201":
+          description: "Successfully created user"
+  /users/{User_ID}:
+    get:
+      operationId: "users.read_one"
+      tags:
+        - Users
+      summary: "Read one user"
+      parameters:
+        - $ref: "#/components/parameters/User_ID"
+      responses:
+        "200":
+          description: "Successfully read user"
+    put:
+      tags:
+        - Users
+      operationId: "users.update"
+      summary: "Update a user"
+      parameters:
+        - $ref: "#/components/parameters/User_ID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "user"
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: "Successfully updated user"
+    delete:
+      tags:
+        - Users
+      operationId: "users.delete"
+      summary: "Delete a user"
+      parameters:
+        - $ref: "#/components/parameters/User_ID"
+      responses:
+        "204":
+          description: "Successfully deleted user"
+
+#----------ACTIVITY----------
+  /activity: 
+    post:
+      operationId: "activity.create"
+      tags:
+        - Activity
+      summary: "Create a activity associated with a person"
+      requestBody:
+          description: "Activity to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "activity"
+                type: "object"
+                required:
+                  - User_ID
+                  - Favourite_activity
+                properties:
+                  User_ID:
+                    type: "integer"
+                  Favourite_activity:
+                    type: "string"
+      responses:
+        "201":
+          description: "Successfully created a activity"
+
+  /activity/{Activity_ID}:
+    get:
+      operationId: "activity.read_one"
+      tags:
+        - Activity
+      summary: "Read one activity"
+      parameters:
+        - $ref: "#/components/parameters/Activity_ID"
+      responses:
+        "200":
+          description: "Successfully read activity"
+    put:
+      tags:
+        - Activity
+      operationId: "activity.update"
+      summary: "Update a activity"
+      parameters:
+        - $ref: "#/components/parameters/Activity_ID"
+      responses:
+        "200":
+          description: "Successfully updated activity"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "activity"
+              $ref: "#/components/schemas/Activity"
+      responses:
+        "200":
+          description: "Successfully updated activity"
+    delete:
+      tags:
+        - Activity
+      operationId: "activity.delete"
+      summary: "Delete a activity"
+      parameters:
+        - $ref: "#/components/parameters/Activity_ID"
+      responses:
+        "204":
+          description: "Successfully deleted activity"
+
+#----------PREFERENCE----------
+  /preference: 
+    post:
+      operationId: "preference.create"
+      tags:
+        - Preference
+      summary: "Create a preference associated with a person"
+      requestBody:
+          description: "Preference to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "preference"
+                type: "object"
+                required:
+                  - User_ID
+                  - Preference
+                properties:
+                  User_ID:
+                    type: "integer"
+                  Preference:
+                    type: "string"
+      responses:
+        "201":
+          description: "Successfully created a activity"
+
+  /preference/{Preference_ID}:
+    get:
+      operationId: "preference.read_one"
+      tags:
+        - Preference
+      summary: "Read one preference"
+      parameters:
+        - $ref: "#/components/parameters/Preference_ID"
+      responses:
+        "200":
+          description: "Successfully read preference"
+    put:
+      tags:
+        - Preference
+      operationId: "preference.update"
+      summary: "Update a preference"
+      parameters:
+        - $ref: "#/components/parameters/Preference_ID"
+      responses:
+        "200":
+          description: "Successfully updated preference"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "preference"
+              $ref: "#/components/schemas/Preference"
+      responses:
+        "200":
+          description: "Successfully updated preference"
+    delete:
+      tags:
+        - Preference
+      operationId: "preference.delete"
+      summary: "Delete a preference"
+      parameters:
+        - $ref: "#/components/parameters/Preference_ID"
+      responses:
+        "204":
+          description: "Successfully deleted preference"
