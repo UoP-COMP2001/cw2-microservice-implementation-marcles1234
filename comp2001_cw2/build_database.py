@@ -4,9 +4,9 @@ from models import Users, Activity, User_activity, Preference, User_preference
 
 
 USERS = [
-    {"User_ID": 1, "Name": "Grace Hopper", "Phone_Number": "1234567890", "Language": "English"},
-    {"User_ID": 2, "Name": "Tim Berners-Lee", "Phone_Number": "2345678901", "Language": "English"},
-    {"User_ID": 3, "Name": "Ada Lovelace", "Phone_Number": "3456789012", "Language": "English"},
+    {"User_ID": 1, "Name": "Grace Hopper", "Phone_Number": "1234567890", "Language": "English", "User_type": "Staff", "Password": "test"},
+    {"User_ID": 2, "Name": "Tim Berners-Lee", "Phone_Number": "2345678901", "Language": "English", "User_type": "User", "Password": "password1"},
+    {"User_ID": 3, "Name": "Ada Lovelace", "Phone_Number": "3456789012", "Language": "English", "User_type": "User", "Password": "abc!"},
 ]
 
 ACTIVITIES = [
@@ -17,6 +17,7 @@ ACTIVITIES = [
 
 USER_ACTIVITY = [
     {"User_ID": 1, "Activity_ID": 1},
+    {"User_ID": 1, "Activity_ID": 2},
     {"User_ID": 2, "Activity_ID": 2},
     {"User_ID": 3, "Activity_ID": 3},
 ]
@@ -46,14 +47,16 @@ with app.app_context():
             User_ID=user["User_ID"],
             Name=user["Name"],
             Phone_Number=user["Phone_Number"],
-            Language=user["Language"]
+            Language=user["Language"],
+            User_type=user["User_type"],
+            Password=user["Password"]
         ))
     db.session.commit()
 
 
     for act in ACTIVITIES:
         db.session.add(Activity(
-            Activity_ID=act["Activity_ID"],
+           Activity_ID=act["Activity_ID"],
             Favourite_activity=act["Favourite_activity"]
         ))
 

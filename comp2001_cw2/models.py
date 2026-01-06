@@ -26,7 +26,9 @@ class Users(db.Model):
     User_ID = db.Column("User_ID", db.Integer, primary_key=True)
     Name = db.Column("Name", db.String(32))
     Phone_Number = db.Column("Phone_Number", db.String(12))
-    Language = db.Column("Language_ID", db.String(32))
+    Language = db.Column("Language", db.String(32))
+    User_type = db.Column("User_type", db.String(32))
+    Password = db.Column("Password", db.String(32))
 
 
 class Activity(db.Model):

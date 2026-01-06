@@ -19,10 +19,10 @@ def update(Preference_ID, preference):
 
     if existing_preference:
         update_preference = preference_schema.load(preference, session=db.session)
-        existing_preference.content = update_preference.content
+        existing_preference.Preference = update_preference.Preference
         db.session.merge(existing_preference)
         db.session.commit()
-        return note_schema.dump(existing_preference), 201
+        return preference_schema.dump(existing_preference), 201
     else:
         abort(404, f"Preference with ID {Preference_ID} not found")
 

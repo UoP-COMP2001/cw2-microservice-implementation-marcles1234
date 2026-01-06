@@ -19,10 +19,10 @@ def update(Activity_ID, activity):
 
     if existing_activity:
         update_activity = activity_schema.load(activity, session=db.session)
-        existing_activity.content = update_activity.content
+        existing_activity.Favourite_activity = update_activity.Favourite_activity
         db.session.merge(existing_activity)
         db.session.commit()
-        return note_schema.dump(existing_activity), 201
+        return activity_schema.dump(existing_activity), 201
     else:
         abort(404, f"Activity with ID {Activity_ID} not found")
 

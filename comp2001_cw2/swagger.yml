@@ -24,8 +24,11 @@ components:
         Phone_Number:
           type: "string"
         Language:
-          type: "integer"
-          format: int32
+          type: "string"
+        User_type:
+          type: "string"
+        Password:
+          type: "string"
     Activity:
       type: "object"
       required:

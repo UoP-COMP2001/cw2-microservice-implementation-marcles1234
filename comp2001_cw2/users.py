@@ -1,6 +1,6 @@
 from flask import abort, make_response
 from config import db
-from models import Users, users_schema
+from models import Users, user_schema, users_schema
 
 
 def read_all():
@@ -10,8 +10,10 @@ def read_all():
 
 def create(user):
     Name = user.get("Name")
-    Phone_number = user.get("Phone_number")
-    Language_ID = user.get("Language_ID")
+    Phone_number = user.get("Phone_Number")
+    Language = user.get("Language")
+    User_type = user.get("User_type")
+    Password = user.get("Password")
 
     if not Name:
         abort(400, "Name is required")
