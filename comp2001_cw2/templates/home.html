@@ -6,7 +6,7 @@
     <title>RP Flask REST API</title>
 </head>
 <body>
-    <h1>Hello, People!</h1>
+    <h1>Here are some users along with their favourite activities:</h1>
 
     {% for user in users %}
     <h2>{{ user.Name }}</h2>
@@ -16,6 +16,8 @@
         {% endfor %}
     </ul>
     {% endfor %}
+	
+	<h1><a href="http://localhost:8000/api/ui/#/" target="_blank">	Visit here for OpenAPI CRUD opperations</a></h1>
 
 </body>
 </html>
